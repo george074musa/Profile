@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <!-- Tailwind CSS CDN for visual framework -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- EMBEDDED CSS STYLING -->
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Glassmorphism Card Effect */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        /* Heading smooth color transitions */
+        #profile-heading {
+            transition: color 0.4s ease, transform 0.3s ease;
+        }
+
+        /* Expandable section transition */
+        .expand-section {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.5s ease-in-out, opacity 0.4s ease-in-out, padding 0.3s ease;
+        }
+        
+        .expand-section.active {
+            max-height: 350px;
+            opacity: 1;
+        }
+
+        /* Button interactions */
+        .btn-interactive {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-interactive:hover {
+            transform: translateY(-2px);
+        }
+        .btn-interactive:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body id="page-body" class="bg-gradient-to-br from-slate-900 via-indigo-950 to-purple-950 min-h-screen py-10 px-4 flex items-center justify-center">
+
+    <!-- MAIN HTML CONTAINER -->
+    <main class="w-full max-w-2xl mx-auto">
+        <article class="glass-card rounded-3xl shadow-2xl overflow-hidden p-6 sm:p-10 relative">
+            
+            <!-- Dynamic Greeting Banner (Feature 4 Output) -->
+            <div id="greeting-banner" class="hidden mb-6 p-4 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-2xl flex items-center justify-between transition-all">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">👋</span>
+                    <p id="greeting-text" class="font-semibold text-sm sm:text-base"></p>
+                </div>
+                <button onclick="dismissGreeting()" class="text-emerald-400 hover:text-emerald-700 text-sm font-bold p-1">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Profile Header & Avatar Section -->
+            <div class="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-slate-200/80">
+                <!-- Avatar image container -->
+                <div class="relative group shrink-0">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+                    <img id="avatar-img" 
+                         src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=500" 
+                         alt="Musa George" 
+                         class="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full object-cover border-4 border-white shadow-lg">
+                </div>
+
+                <!-- Text Header Details -->
+                <div class="text-center sm:text-left flex-1">
+                    <h1 id="profile-heading" class="text-3xl sm:text-4xl font-extrabold text-slate-800 tracking-tight">
+                     Musa George   
+                    </h1>
+                    <p class="text-indigo-600 font-semibold text-sm mt-1">Creative Developer and projects that can community</p>
+                    
+                    <!-- Short Bio Paragraph -->
+                    <p class="text-slate-600 text-sm mt-3 leading-relaxed">
+                        Hello! Welcome to my profile webpage. I love building projects that can community, crafting clean user interfaces, and solving real-world problems with code!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Personal Details Badges -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 my-6">
+                <!-- Age -->
+                <div class="bg-white/60 border border-slate-200/80 p-3.5 rounded-2xl flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-lg shrink-0">
+                        <i class="fa-solid fa-cake-candles"></i>
+                    </div>
+                    <div>
+                        <span class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold">Age</span>
+                        <span class="text-slate-800 font-bold text-sm">13 Years Old</span>
+                    </div>
+                </div>
+
+                <!-- Hobby -->
+                <div class="bg-white/60 border border-slate-200/80 p-3.5 rounded-2xl flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center text-lg shrink-0">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <div>
+                        <span class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold">Hobby</span>
+                        <span class="text-slate-800 font-bold text-sm">Game Dev $ Coding</span>
+                    </div>
+                </div>
+
+                <!-- Programming Language -->
+                <div class="bg-white/60 border border-slate-200/80 p-3.5 rounded-2xl flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg shrink-0">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <div>
+                        <span class="block text-[11px] uppercase tracking-wider text-slate-400 font-bold">Best Languages</span>
+                        <span class="text-slate-800 font-bold text-sm">JavaScript $ Css</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 1: Expandable Bio Info -->
+            <div id="more-info" class="expand-section bg-indigo-50/70 rounded-2xl border border-indigo-100 text-slate-700 text-sm leading-relaxed mb-6">
+                <div class="p-4 sm:p-5">
+                    <h3 class="font-bold text-indigo-950 mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-sparkles text-indigo-600"></i> More About Me
+                    </h3>
+                    <p class="mb-2">
+                        I spend my free time exploring web animation techniques, participating in local hackathons, and building open-source projects.
+                    </p>
+                    <p class="text-xs text-indigo-700 font-medium">Goal: To master full-stack software development and launch interactive apps that make a positive impact!</p>
+                </div>
+            </div>
+
+            <!-- Feature 3: Dynamic Activities List -->
+            <div class="mb-8">
+                <h2 class="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-heart text-rose-500"></i> Favorite Activities
+                </h2>
+                <!-- Dynamic Target List for JavaScript Array rendering -->
+                <ul id="activities-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <!-- JavaScript dynamically inserts list items here -->
+                </ul>
+            </div>
+
+            <!-- Action Controls & Buttons Section -->
+            <div class="border-t border-slate-200/80 pt-6">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Interactive Controls</h3>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <!-- Feature 1 Button -->
+                    <button id="toggle-more-btn" class="btn-interactive w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-semibold text-sm shadow-md shadow-indigo-200 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span id="toggle-btn-text">Show More About Me</span>
+                    </button>
+
+                    <!-- Feature 2 Button -->
+                    <button id="change-bg-btn" class="btn-interactive w-full py-3 px-4 bg-slate-800 hover:bg-slate-900 text-white rounded-xl font-semibold text-sm shadow-md shadow-slate-300 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-palette"></i>
+                        <span>Change Background</span>
+                    </button>
+
+                    <!-- Feature 4 Button -->
+                    <button id="greet-btn" class="btn-interactive w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold text-sm shadow-md shadow-emerald-200 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-hand-wave"></i>
+                        <span>Greet Me!</span>
+                    </button>
+
+                    <!-- Bonus Challenge Button -->
+                    <button id="change-text-color-btn" class="btn-interactive w-full py-3 px-4 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-semibold text-sm shadow-md shadow-purple-200 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-font"></i>
+                        <span>Change Text Colour</span>
+                    </button>
+                </div>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- EMBEDDED JAVASCRIPT CODE -->
+    <script>
+        // 1. VARIABLES (const & let)
+        // Array of favorite activities (Feature 3 requirement)
+        const favoriteActivities = [
+            { title: "Building Web Apps", icon: "fa-code", desc: "Creating reactive modern interfaces" },
+            { title: "Digital Photography", icon: "fa-camera", desc: "Capturing architecture & street scenes" },
+            { title: "Playing Chess", icon: "fa-chess", desc: "Practicing tactics and logical thinking" },
+            { title: "Mountain Biking", icon: "fa-bicycle", desc: "Exploring nature trails on weekends" }
+        ];
+
+        // Background color options (Feature 2)
+        const backgroundOptions = [
+            "linear-gradient(to bottom right, #0f172a, #312e81, #581c87)",
+            "linear-gradient(to bottom right, #064e3b, #0284c7, #1e1b4b)",
+            "linear-gradient(to bottom right, #701a75, #831843, #1e293b)",
+            "linear-gradient(to bottom right, #18181b, #27272a, #3f3f46)",
+            "linear-gradient(to bottom right, #431407, #7c2d12, #1e1b4b)"
+        ];
+
+        // Colors for heading text (Bonus Challenge)
+        const headingColors = [
+            "#1e293b", // Default dark slate
+            "#2563eb", // Royal blue
+            "#7c3aed", // Vibrant purple
+            "#059669", // Emerald green
+            "#dc2626", // Warm red
+            "#d97706"  // Amber yellow
+        ];
+
+        // State trackers
+        let currentBgIndex = 0;
+        let currentHeadingColorIndex = 0;
+        let isMoreInfoVisible = false;
+
+        // DOM Element references
+        const pageBody = document.getElementById('page-body');
+        const profileHeading = document.getElementById('profile-heading');
+        const moreInfoSection = document.getElementById('more-info');
+        const toggleMoreBtn = document.getElementById('toggle-more-btn');
+        const toggleBtnText = document.getElementById('toggle-btn-text');
+        const changeBgBtn = document.getElementById('change-bg-btn');
+        const greetBtn = document.getElementById('greet-btn');
+        const changeTextColorBtn = document.getElementById('change-text-color-btn');
+        const activitiesList = document.getElementById('activities-list');
+        const greetingBanner = document.getElementById('greeting-banner');
+        const greetingText = document.getElementById('greeting-text');
+
+        // 2. FUNCTIONS & DOM MANIPULATION
+
+        /**
+         * Render activities array dynamically into HTML DOM
+         */
+        function renderActivities() {
+            activitiesList.innerHTML = ""; // Clear existing elements
+
+            favoriteActivities.forEach(activity => {
+                const li = document.createElement('li');
+                li.className = "flex items-center gap-3 p-3 bg-white/70 border border-slate-200/70 rounded-xl hover:bg-white transition-all";
+                li.innerHTML = `
+                    <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-sm shrink-0">
+                        <i class="fa-solid ${activity.icon}"></i>
+                    </div>
+                    <div>
+                        <span class="block text-xs font-bold text-slate-800">${activity.title}</span>
+                        <span class="block text-[11px] text-slate-500">${activity.desc}</span>
+                    </div>
+                `;
+                activitiesList.appendChild(li);
+            });
+        }
+
+        /**
+         * Feature 1: Toggle Extra Information
+         */
+        function toggleMoreInfo() {
+            isMoreInfoVisible = !isMoreInfoVisible;
+
+            if (isMoreInfoVisible) {
+                moreInfoSection.classList.add('active');
+                toggleBtnText.textContent = "Hide Details";
+                toggleMoreBtn.classList.replace('bg-indigo-600', 'bg-indigo-800');
+            } else {
+                moreInfoSection.classList.remove('active');
+                toggleBtnText.textContent = "Show More About Me";
+                toggleMoreBtn.classList.replace('bg-indigo-800', 'bg-indigo-600');
+            }
+        }
+
+        /**
+         * Feature 2: Change Background
+         */
+        function changeBackground() {
+            currentBgIndex = (currentBgIndex + 1) % backgroundOptions.length;
+            pageBody.style.background = backgroundOptions[currentBgIndex];
+        }
+
+        /**
+         * Feature 4: Interactive Greeting with prompt and if...else logic
+         */
+        function handleGreeting() {
+            const visitorName = prompt("What is your name?");
+
+            // IF...ELSE Statement
+            if (visitorName !== null && visitorName.trim() !== "") {
+                const cleanName = visitorName.trim();
+                greetingText.textContent = `Welcome to my profile, ${cleanName}! Thanks for visiting!`;
+                greetingBanner.classList.remove('hidden');
+            } else if (visitorName !== null && visitorName.trim() === "") {
+                greetingText.textContent = "Hello there, friend! Welcome to my interactive profile!";
+                greetingBanner.classList.remove('hidden');
+            }
+        }
+
+        /**
+         * Dismiss greeting banner
+         */
+        function dismissGreeting() {
+            greetingBanner.classList.add('hidden');
+        }
+
+        /**
+         * Bonus Challenge: Change Heading Text Color
+         */
+        function changeHeadingColor() {
+            currentHeadingColorIndex = (currentHeadingColorIndex + 1) % headingColors.length;
+            profileHeading.style.color = headingColors[currentHeadingColorIndex];
+        }
+
+        // 3. EVENT LISTENERS
+        toggleMoreBtn.addEventListener('click', toggleMoreInfo);
+        changeBgBtn.addEventListener('click', changeBackground);
+        greetBtn.addEventListener('click', handleGreeting);
+        changeTextColorBtn.addEventListener('click', changeHeadingColor);
+
+        // Render dynamic content on initial load
+        window.addEventListener('DOMContentLoaded', renderActivities);
+    </script>
+</body>
+</html>
+
